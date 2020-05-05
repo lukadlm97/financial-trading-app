@@ -6,11 +6,18 @@ using System.Text;
 
 namespace SimpleTrader.EntityFramework
 {
-    class SimpleTraderDbContext:DbContext
+    public class SimpleTraderDbContext:DbContext
     {
+        
+
         DbSet<User> Users;
         DbSet<Account> Accounts;
         DbSet<AssetTransaction> AssetTransactions;
+        public SimpleTraderDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,11 +26,5 @@ namespace SimpleTrader.EntityFramework
             base.OnModelCreating(modelBuilder);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server = (localdb)\MSSQLLocalDB; Database = Simple_Trader_Dev; Trusted_Connection = True; MultipleActiveResultSets = true");
-
-            base.OnConfiguring(optionsBuilder);
-        }
     }
 }

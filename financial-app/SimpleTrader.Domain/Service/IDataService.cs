@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.Domain.Service
 {
-    interface IDataService<T>
+    public interface IDataService<T>
     {
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(int id);
