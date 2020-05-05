@@ -1,0 +1,1 @@
+# financial-trading-app
