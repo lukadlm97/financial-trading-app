@@ -35,7 +35,7 @@ namespace SimpleTrader.EntityFramework.Services
             {
                 T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id==id);
                 context.Set<T>().Remove(entity);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 return true;
             }
@@ -67,7 +67,7 @@ namespace SimpleTrader.EntityFramework.Services
             {
                 entity.Id = id;
                 context.Set<T>().Update(entity);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 return entity;
             }
