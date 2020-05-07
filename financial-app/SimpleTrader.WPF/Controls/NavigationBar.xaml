@@ -12,8 +12,11 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Background="{StaticResource BrushPrimary1}">Simple Trader</TextBlock>
+        <TextBlock Grid.Row="0" Padding="10" FontSize="28" Foreground="White" Background="{StaticResource BrushPrimary1}">Simple Trader</TextBlock>
         <Grid Grid.Row="1" Background="{StaticResource BrushPrimary2}">
+            <Grid.Resources>
+                <Style TargetType="RadioButton" BasedOn="{StaticResource NavButton}"/>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
