@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SimpleTrader.Domain\SimpleTrader.Domain.csproj" />
     <ProjectReference Include="..\SimpleTrader.EntityFramework\SimpleTrader.EntityFramework.csproj" />
+    <ProjectReference Include="..\SimpleTrader.FinancialModelingPropAPI\SimpleTrader.FinancialModelingPropAPI.csproj" />
   </ItemGroup>
 
 </Project>
