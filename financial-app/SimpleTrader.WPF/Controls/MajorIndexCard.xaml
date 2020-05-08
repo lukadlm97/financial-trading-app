@@ -14,7 +14,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="18" Text="{Binding Type,FallbackValue=Name}"/>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="18" Text="{Binding IndexName,FallbackValue=Name}"/>
 
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>

@@ -13,14 +13,13 @@ namespace SimpleTrader.FinancialModelingPropAPI.Services
     {
         public async Task<MajorIndex> GetMajorIndex(MajorIndexType indexType)
         {
-            using(HttpClient client = new HttpClient())
+            using(FinancialMarketPrepHttpClient client = new FinancialMarketPrepHttpClient())
             {
-                string uri = "https://financialmodelingprep.com/api/v3/majors-indexes/" + GetUriSuffix(indexType);
-                
-                HttpResponseMessage httpResponse = await client.GetAsync(uri);
-                string jsonResponse = await httpResponse.Content.ReadAsStringAsync();
+                string uri = "majors-indexes/" + GetUriSuffix(indexType);
 
-                MajorIndex majorIndex = JsonConvert.DeserializeObject<MajorIndex>(jsonResponse);
+
+                MajorIndex majorIndex = await client.GetAsync<MajorIndex>(uri);
+                
                 majorIndex.Type = indexType;
 
                 return majorIndex;
@@ -38,7 +37,7 @@ namespace SimpleTrader.FinancialModelingPropAPI.Services
                 case MajorIndexType.SP500:
                     return ".INX";
                 default:
-                    return ".DJI";
+                    throw new Exception("MajorIndexType dose not have a suffix defined.");
             }
         }
     }

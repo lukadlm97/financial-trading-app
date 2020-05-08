@@ -17,10 +17,7 @@ namespace SimpleTrader.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            new MajorIndexService().GetMajorIndex(Domain.Models.MajorIndexType.DowJones).ContinueWith((taks) =>
-            {
-                var index = taks.Result;
-            });
+            new StockPriceService().GetPrice("AAPL");
 
             Window window = new MainWindow();
             window.DataContext = new MainViewModel();
