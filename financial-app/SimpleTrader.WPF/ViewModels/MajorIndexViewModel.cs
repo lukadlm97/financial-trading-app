@@ -40,16 +40,16 @@ namespace SimpleTrader.WPF.ViewModels
                 OnPropertyChanged(nameof(Nasdaq));
             }
         }
-        private MajorIndex _SP500;
+        private MajorIndex _sP500;
         public MajorIndex SP500
         {
             get
             {
-                return _dowJones;
+                return _sP500;
             }
             set
             {
-                _SP500 = value;
+                _sP500 = value;
                 OnPropertyChanged(nameof(SP500));
             }
         }
