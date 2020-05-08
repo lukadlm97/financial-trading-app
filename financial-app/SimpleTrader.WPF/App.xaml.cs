@@ -17,7 +17,7 @@ namespace SimpleTrader.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            new StockPriceService().GetPrice("AAPL");
+            
 
             Window window = new MainWindow();
             window.DataContext = new MainViewModel();
