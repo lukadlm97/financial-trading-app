@@ -42,7 +42,7 @@ namespace SimpleTrader.Domain.Service.TransactionServices
                 Shares = shares
             };
 
-            buyer.Transactions.Add(assetTransaction);
+            buyer.AssetTransactions.Add(assetTransaction);
             buyer.Balance -= transactionAmount;
 
             await _accountService.Update(buyer.Id, buyer);

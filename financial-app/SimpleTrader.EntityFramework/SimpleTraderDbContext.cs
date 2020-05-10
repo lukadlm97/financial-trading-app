@@ -8,11 +8,11 @@ namespace SimpleTrader.EntityFramework
 {
     public class SimpleTraderDbContext:DbContext
     {
-        
 
-        DbSet<User> Users;
-        DbSet<Account> Accounts;
-        DbSet<AssetTransaction> AssetTransactions;
+
+        public DbSet<User> Users;
+        public DbSet<Account> Accounts;
+        public DbSet<AssetTransaction> AssetTransactions;
         public SimpleTraderDbContext(DbContextOptions options) : base(options)
         {
 
