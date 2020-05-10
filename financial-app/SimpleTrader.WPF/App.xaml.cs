@@ -1,9 +1,11 @@
-﻿using SimpleTrader.Domain.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SimpleTrader.Domain.Models;
 using SimpleTrader.Domain.Service;
 using SimpleTrader.Domain.Service.TransactionServices;
 using SimpleTrader.EntityFramework;
 using SimpleTrader.EntityFramework.Services;
 using SimpleTrader.FinancialModelingPropAPI.Services;
+using SimpleTrader.WPF.State.Navigators;
 using SimpleTrader.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,22 +24,34 @@ namespace SimpleTrader.WPF
     {
         protected override async  void OnStartup(StartupEventArgs e)
         {
-            //IDataService<User> service = new GenericDataService<User>(new SimpleTraderDbContextFactory());
-            //IStockPriceService priceService = new StockPriceService();
-            //IBuyStockService buyStockService = new BuyStockService(priceService, acccountService);
-            IDataService<Account> dataService = new AccountDataService(new SimpleTraderDbContextFactory());
-
-
-            //Console.WriteLine(service.Create(new User { Username="asdasd"}));
-            dataService.GetAll();
-            //await buyStockService.BuyStock(buyer, "T", 2);
-
+            IServiceProvider serviceProvider = CreateServiceProvider();
+            IBuyStockService buyStockService = serviceProvider.GetRequiredService<IBuyStockService>();
 
             Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
+            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
             window.Show();
 
+            using (IServiceScope scope = serviceProvider.CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<MainViewModel>();
+            }
+
             base.OnStartup(e);
+        }
+
+        private IServiceProvider CreateServiceProvider()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<SimpleTraderDbContextFactory>();
+            services.AddSingleton<IDataService<Account>, AccountDataService>();
+            services.AddSingleton<IStockPriceService, StockPriceService>();
+            services.AddSingleton<IBuyStockService,BuyStockService>();
+
+            services.AddScoped<INavigator, Navigator>();
+            services.AddScoped<MainViewModel>();
+
+            return services.BuildServiceProvider();
         }
     }
 }
