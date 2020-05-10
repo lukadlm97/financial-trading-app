@@ -1,6 +1,7 @@
 ﻿using SimpleTrader.Domain.Models;
 using SimpleTrader.Domain.Service;
 using SimpleTrader.Domain.Service.TransactionServices;
+using SimpleTrader.EntityFramework;
 using SimpleTrader.EntityFramework.Services;
 using SimpleTrader.FinancialModelingPropAPI.Services;
 using SimpleTrader.WPF.ViewModels;
@@ -21,12 +22,14 @@ namespace SimpleTrader.WPF
     {
         protected override async  void OnStartup(StartupEventArgs e)
         {
-            IDataService<User> service = new GenericDataService<User>(new EntityFramework.SimpleTraderDbContextFactory());
+            //IDataService<User> service = new GenericDataService<User>(new SimpleTraderDbContextFactory());
             //IStockPriceService priceService = new StockPriceService();
             //IBuyStockService buyStockService = new BuyStockService(priceService, acccountService);
+            IDataService<Account> dataService = new AccountDataService(new SimpleTraderDbContextFactory());
 
 
-            int a =  service.GetAll().Result.LastOrDefault().Id;
+            //Console.WriteLine(service.Create(new User { Username="asdasd"}));
+            dataService.GetAll();
             //await buyStockService.BuyStock(buyer, "T", 2);
 
 
